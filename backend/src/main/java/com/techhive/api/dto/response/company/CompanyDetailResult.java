@@ -1,12 +1,12 @@
 package com.techhive.api.dto.response.company;
 
-import com.techhive.entity.Company;
+import com.techhive.entity.CompanyEntity;
 
 public record CompanyDetailResult(
-    Company company,
+    CompanyEntity companyEntity,
     int articleNumber
 ) {
-    public static CompanyDetailResult of(Company company, int articleNumber) {
-        return new CompanyDetailResult(company, articleNumber);
+    public static CompanyDetailResult of(CompanyEntity companyEntity, int articleNumber) {
+        return new CompanyDetailResult(companyEntity, articleNumber);
     }
 }

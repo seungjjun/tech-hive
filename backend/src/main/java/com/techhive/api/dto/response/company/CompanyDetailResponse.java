@@ -7,8 +7,8 @@ public record CompanyDetailResponse(
 ) {
     public static CompanyDetailResponse from(CompanyDetailResult result) {
         return new CompanyDetailResponse(
-            result.company().getId(),
-            result.company().getName(),
+            result.companyEntity().getId(),
+            result.companyEntity().getName(),
             result.articleNumber()
         );
     }

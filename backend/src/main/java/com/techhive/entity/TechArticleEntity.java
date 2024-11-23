@@ -6,7 +6,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -19,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "tech_articles")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class TechArticle {
+public class TechArticleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +26,11 @@ public class TechArticle {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id")
-    private Company company;
+    private CompanyEntity company;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
-    private Category category;
+    private CategoryEntity category;
 
     private String title;
 
@@ -46,6 +45,9 @@ public class TechArticle {
     @Column(columnDefinition = "TEXT")
     private String coreSummary;
 
+    @Column(columnDefinition = "TEXT")
+    private String originArticle;
+
     @Column(length = 500)
     private String thumbnailImageUrl;
 
@@ -53,15 +55,15 @@ public class TechArticle {
 
     private LocalDateTime publishedDate;
 
-    public TechArticle(Company company,
-                       Category category,
-                       String title,
-                       String link,
-                       String oneLineSummary,
-                       String threeLineSummary,
-                       String coreSummary,
-                       String thumbnailImageUrl,
-                       LocalDateTime publishedDate) {
+    public TechArticleEntity(CompanyEntity company,
+                             CategoryEntity category,
+                             String title,
+                             String link,
+                             String oneLineSummary,
+                             String threeLineSummary,
+                             String coreSummary, String originArticle,
+                             String thumbnailImageUrl,
+                             LocalDateTime publishedDate) {
         this.company = company;
         this.category = category;
         this.title = title;
@@ -69,6 +71,7 @@ public class TechArticle {
         this.oneLineSummary = oneLineSummary;
         this.threeLineSummary = threeLineSummary;
         this.coreSummary = coreSummary;
+        this.originArticle = originArticle;
         this.thumbnailImageUrl = thumbnailImageUrl;
         this.viewCount = 0;
         this.publishedDate = publishedDate;

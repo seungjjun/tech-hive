@@ -1,7 +1,7 @@
 package com.techhive.service;
 
 import com.techhive.api.dto.response.company.CompanyDetailResult;
-import com.techhive.entity.Company;
+import com.techhive.entity.CompanyEntity;
 import com.techhive.repository.CompanyRepository;
 import com.techhive.repository.TechArticleRepository;
 import java.util.List;
@@ -16,14 +16,14 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
     private final TechArticleRepository techArticleRepository;
 
-    public List<Company> getCompaniesList() {
+    public List<CompanyEntity> getCompaniesList() {
         return companyRepository.findAll();
     }
 
     public CompanyDetailResult getCompany(Long companyId) {
-        Company company = companyRepository.findById(companyId)
+        CompanyEntity companyEntity = companyRepository.findById(companyId)
             .orElseThrow(() -> new NoSuchElementException("존재하지 않는 기업 입니다. - " + companyId));
         int articleNumber = techArticleRepository.countByCompanyId(companyId);
-        return CompanyDetailResult.of(company, articleNumber);
+        return CompanyDetailResult.of(companyEntity, articleNumber);
     }
 }

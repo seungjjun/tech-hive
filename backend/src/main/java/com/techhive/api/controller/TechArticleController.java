@@ -3,7 +3,7 @@ package com.techhive.api.controller;
 import com.techhive.api.dto.request.techarticle.TechArticleSortType;
 import com.techhive.api.dto.response.techarticle.TechArticleListResponse;
 import com.techhive.api.dto.response.techarticle.TechArticleResponse;
-import com.techhive.entity.TechArticle;
+import com.techhive.entity.TechArticleEntity;
 import com.techhive.service.TechArticleService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -22,27 +22,28 @@ public class TechArticleController {
 
     @GetMapping
     public TechArticleListResponse getTechArticles() {
-        List<TechArticle> allTechArticles = techArticleService.getAllTechArticles();
-        return TechArticleListResponse.from(allTechArticles);
+        List<TechArticleEntity> allTechArticleEntities = techArticleService.getAllTechArticles();
+        return TechArticleListResponse.from(allTechArticleEntities);
     }
 
     @GetMapping("/{articleId}")
     public TechArticleResponse getTechArticle(@PathVariable Long articleId) {
-        TechArticle techArticle = techArticleService.getTechArticle(articleId);
-        return TechArticleResponse.from(techArticle);
+        TechArticleEntity techArticleEntity = techArticleService.getTechArticle(articleId);
+        return TechArticleResponse.from(techArticleEntity);
     }
 
     @GetMapping("/companies/{companyId}")
     public TechArticleListResponse getTechArticlesOfSpecificCompany(
         @PathVariable Long companyId,
         @RequestParam(value = "sort", defaultValue = "LATEST") TechArticleSortType sortType) {
-        List<TechArticle> techArticlesByCompany = techArticleService.getTechArticlesByCompany(companyId, sortType);
-        return TechArticleListResponse.from(techArticlesByCompany);
+        List<TechArticleEntity>
+            techArticlesByCompanyEntity = techArticleService.getTechArticlesByCompany(companyId, sortType);
+        return TechArticleListResponse.from(techArticlesByCompanyEntity);
     }
 
     @GetMapping("/popular")
     public TechArticleListResponse getPopularTechArticles() {
-        List<TechArticle> popularTechArticles = techArticleService.getPopularTechArticles();
-        return TechArticleListResponse.from(popularTechArticles);
+        List<TechArticleEntity> popularTechArticleEntities = techArticleService.getPopularTechArticles();
+        return TechArticleListResponse.from(popularTechArticleEntities);
     }
 }

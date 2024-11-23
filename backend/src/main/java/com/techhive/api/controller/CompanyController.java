@@ -3,8 +3,7 @@ package com.techhive.api.controller;
 import com.techhive.api.dto.response.company.CompanyDetailResponse;
 import com.techhive.api.dto.response.company.CompanyDetailResult;
 import com.techhive.api.dto.response.company.CompanyListResponse;
-import com.techhive.api.dto.response.company.CompanyResponse;
-import com.techhive.entity.Company;
+import com.techhive.entity.CompanyEntity;
 import com.techhive.service.CompanyService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +21,7 @@ public class CompanyController {
 
     @GetMapping
     public CompanyListResponse getCompanies() {
-        List<Company> companiesList = companyService.getCompaniesList();
+        List<CompanyEntity> companiesList = companyService.getCompaniesList();
         return CompanyListResponse.from(companiesList);
     }
 

@@ -1,6 +1,6 @@
 package com.techhive.api.dto.response.techarticle;
 
-import com.techhive.entity.TechArticle;
+import com.techhive.entity.TechArticleEntity;
 import java.time.LocalDateTime;
 
 public record TechArticleResponse(
@@ -15,18 +15,18 @@ public record TechArticleResponse(
     int viewCount,
     LocalDateTime publishedDate
 ) {
-    public static TechArticleResponse from(TechArticle techArticle) {
+    public static TechArticleResponse from(TechArticleEntity techArticleEntity) {
         return new TechArticleResponse(
-            techArticle.getId(),
-            techArticle.getCompany().getName(),
-            techArticle.getCategory().getName(),
-            techArticle.getTitle(),
-            techArticle.getLink(),
-            techArticle.getOneLineSummary(),
-            techArticle.getThreeLineSummary(),
-            techArticle.getCoreSummary(),
-            techArticle.getViewCount(),
-            techArticle.getPublishedDate()
+            techArticleEntity.getId(),
+            techArticleEntity.getCompany().getName(),
+            techArticleEntity.getCategory().getName(),
+            techArticleEntity.getTitle(),
+            techArticleEntity.getLink(),
+            techArticleEntity.getOneLineSummary(),
+            techArticleEntity.getThreeLineSummary(),
+            techArticleEntity.getCoreSummary(),
+            techArticleEntity.getViewCount(),
+            techArticleEntity.getPublishedDate()
         );
     }
 }
