@@ -12,6 +12,7 @@ public record TechArticleResponse(
     String oneLineSummary,
     String threeLineSummary,
     String coreSummary,
+    String imageUrl,
     int viewCount,
     LocalDateTime publishedDate
 ) {
@@ -25,6 +26,7 @@ public record TechArticleResponse(
             techArticleEntity.getOneLineSummary(),
             techArticleEntity.getThreeLineSummary(),
             techArticleEntity.getCoreSummary(),
+            techArticleEntity.getThumbnailImageUrl(),
             techArticleEntity.getViewCount(),
             techArticleEntity.getPublishedDate()
         );

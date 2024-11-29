@@ -3,6 +3,7 @@ package com.techhive.api.controller;
 import com.techhive.api.dto.request.techarticle.TechArticleSortType;
 import com.techhive.api.dto.response.techarticle.TechArticleListResponse;
 import com.techhive.api.dto.response.techarticle.TechArticleResponse;
+import com.techhive.api.dto.response.techarticle.TechArticleSearchListResponse;
 import com.techhive.entity.TechArticleEntity;
 import com.techhive.service.TechArticleService;
 import java.util.List;
@@ -41,9 +42,23 @@ public class TechArticleController {
         return TechArticleListResponse.from(techArticlesByCompanyEntity);
     }
 
+    @GetMapping("/recommend")
+    public TechArticleListResponse getRecommendTechArticles() {
+        List<TechArticleEntity> techArticles = techArticleService.getRecommendTechArticles();
+        return TechArticleListResponse.from(techArticles);
+    }
+
     @GetMapping("/popular")
     public TechArticleListResponse getPopularTechArticles() {
         List<TechArticleEntity> popularTechArticleEntities = techArticleService.getPopularTechArticles();
         return TechArticleListResponse.from(popularTechArticleEntities);
+    }
+
+    @GetMapping("/search")
+    public TechArticleListResponse getSearchTechArticles(
+        @RequestParam(value = "search") String searchTerm
+    ) {
+        List<TechArticleEntity> searchedTechArticles = techArticleService.getSearchTechArticles(searchTerm);
+        return TechArticleListResponse.from(searchedTechArticles);
     }
 }

@@ -11,8 +11,9 @@ import com.techhive.model.CompanyType;
 import com.techhive.model.openai.TechArticleSummaryBody;
 import com.techhive.repository.CategoryRepository;
 import com.techhive.repository.CompanyRepository;
+import com.techhive.repository.OgMetaTagRepository;
 import com.techhive.repository.TechArticleRepository;
-import com.techhive.utils.DateUtils;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class TechArticleService {
 
+    private static final int RECOMMEND_TECH_ARTICLE_LIMIT = 4;
     private static final String SORT_PUBLISHED_DATE = "publishedDate";
     private static final String SORT_VIEW_COUNT = "viewCount";
 
@@ -33,6 +35,7 @@ public class TechArticleService {
     private final TechArticleRepository techArticleRepository;
     private final CompanyRepository companyRepository;
     private final CategoryRepository categoryRepository;
+    private final OgMetaTagRepository ogMetaTagRepository;
 
     public List<TechArticleEntity> getAllTechArticles() {
         return techArticleRepository.findAll(Sort.by(SORT_PUBLISHED_DATE).descending());
@@ -51,20 +54,27 @@ public class TechArticleService {
     }
 
     public List<TechArticleEntity> getPopularTechArticles() {
-        return techArticleRepository.findTop5ByOrderByViewCountDesc();
+        return techArticleRepository.findTop3ByOrderByViewCountDesc();
     }
 
+    public List<TechArticleEntity> getRecommendTechArticles() {
+        return techArticleRepository.findRandomTechArticles(RECOMMEND_TECH_ARTICLE_LIMIT);
+    }
+
+    @Transactional
     public void saveTechArticle(CompanyType companyType, WebCrawlingResult result, TechArticleSummaryBody body) {
         CompanyEntity company = companyRepository.findById(companyType.getId()).get();
-        // TODO 원글 카테고리에 따른 수정 필요
+        // TODO 원글 카테고리에 따른 수정 필요 -> result.category()
         CategoryEntity category = categoryRepository.findByNameIgnoreCase(CategoryType.BACKEND.getTypeName());
 
         LocalDateTime dateTime = result.dateTime();
         String threeLineSummary = gson.toJson(body.threeLineSummary());
         String coreLineSummary = gson.toJson(body.coreSummary());
 
+        ogMetaTagRepository.save(result.ogMetaTag());
         TechArticleEntity techArticleEntity = new TechArticleEntity(
             company, category,
+            result.ogMetaTag(),
             result.title(), result.url(),
             body.oneLineSummary(),
             threeLineSummary,
@@ -73,5 +83,9 @@ public class TechArticleService {
             result.thumbnailImageUrl(),
             dateTime);
         techArticleRepository.save(techArticleEntity);
+    }
+
+    public List<TechArticleEntity> getSearchTechArticles(String searchTerm) {
+        return techArticleRepository.searchByFullText(searchTerm);
     }
 }

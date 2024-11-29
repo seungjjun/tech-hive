@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -31,6 +32,10 @@ public class TechArticleEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private CategoryEntity category;
+
+    @OneToOne
+    @JoinColumn(name = "og_meta_tag_id")
+    private OgMetaTagEntity ogMetaTag;
 
     private String title;
 
@@ -57,6 +62,7 @@ public class TechArticleEntity {
 
     public TechArticleEntity(CompanyEntity company,
                              CategoryEntity category,
+                             OgMetaTagEntity ogMetaTag,
                              String title,
                              String link,
                              String oneLineSummary,
@@ -66,6 +72,7 @@ public class TechArticleEntity {
                              LocalDateTime publishedDate) {
         this.company = company;
         this.category = category;
+        this.ogMetaTag = ogMetaTag;
         this.title = title;
         this.link = link;
         this.oneLineSummary = oneLineSummary;

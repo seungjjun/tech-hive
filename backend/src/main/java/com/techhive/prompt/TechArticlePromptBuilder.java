@@ -26,7 +26,7 @@ public class TechArticlePromptBuilder {
                       "three_line_summary" : "- 클라우드 컴퓨팅 기술의 급속한 발전으로 많은 기업들이 클라우드 기반 인프라를 채택하고 있습니다.
                       - 하지만 보안과 데이터 관리 측면에서 새로운 도전 과제가 발생하여, 기업들은 이를 해결하기 위한 전략을 마련하고 있습니다.",
                       "core_summary" : "클라우드 컴퓨팅 기술의 발전
-                      - 클라우드 컴퓨팅 기술이 빠르게 발전하면서, 많은 기업들이 클라우드 기반의 인프라를 도입하고 있습니다. 이는 비용 절감과 유연한 자원 관리를 가능하게 합니다.
+                      클라우드 컴퓨팅 기술이 빠르게 발전하면서, 많은 기업들이 클라우드 기반의 인프라를 도입하고 있습니다. 이는 비용 절감과 유연한 자원 관리를 가능하게 합니다.
                       마이크로서비스 아키텍처와 컨테이너 기술의 결합
                       마이크로서비스 아키텍처와 컨테이너 기술의 결합은 애플리케이션의 확장성과 유연성을 크게 향상시킵니다. 이를 통해 개발 및 배포 과정이 간소화되고, 시스템의 유지보수가 용이해집니다.
                       보안 및 데이터 관리의 새로운 도전 과제
@@ -38,7 +38,7 @@ public class TechArticlePromptBuilder {
                     """)
         );
 
-        final String instructionPrompt = promptTemplate.generatePrompt(data);
+        final String instructionPrompt = promptTemplate.generatePrompt(examples, data);
         log.debug("\n[[INSTRUCTION PROMPT]]\n{}", instructionPrompt);
         return instructionPrompt;
     }
