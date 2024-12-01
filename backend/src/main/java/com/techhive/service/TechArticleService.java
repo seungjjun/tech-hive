@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -37,8 +39,9 @@ public class TechArticleService {
     private final CategoryRepository categoryRepository;
     private final OgMetaTagRepository ogMetaTagRepository;
 
-    public List<TechArticleEntity> getAllTechArticles() {
-        return techArticleRepository.findAll(Sort.by(SORT_PUBLISHED_DATE).descending());
+    public List<TechArticleEntity> getAllTechArticles(int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
+        return techArticleRepository.findByOrderByPublishedDateDesc(pageable);
     }
 
     public TechArticleEntity getTechArticle(Long articleId) {
@@ -62,7 +65,7 @@ public class TechArticleService {
     }
 
     @Transactional
-    public void saveTechArticle(CompanyType companyType, WebCrawlingResult result, TechArticleSummaryBody body) {
+    public TechArticleEntity saveTechArticle(CompanyType companyType, WebCrawlingResult result, TechArticleSummaryBody body) {
         CompanyEntity company = companyRepository.findById(companyType.getId()).get();
         // TODO 원글 카테고리에 따른 수정 필요 -> result.category()
         CategoryEntity category = categoryRepository.findByNameIgnoreCase(CategoryType.BACKEND.getTypeName());
@@ -83,9 +86,6 @@ public class TechArticleService {
             result.thumbnailImageUrl(),
             dateTime);
         techArticleRepository.save(techArticleEntity);
-    }
-
-    public List<TechArticleEntity> getSearchTechArticles(String searchTerm) {
-        return techArticleRepository.searchByFullText(searchTerm);
+        return techArticleEntity;
     }
 }

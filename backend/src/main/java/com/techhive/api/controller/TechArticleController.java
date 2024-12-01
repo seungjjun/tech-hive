@@ -5,6 +5,7 @@ import com.techhive.api.dto.response.techarticle.TechArticleListResponse;
 import com.techhive.api.dto.response.techarticle.TechArticleResponse;
 import com.techhive.api.dto.response.techarticle.TechArticleSearchListResponse;
 import com.techhive.entity.TechArticleEntity;
+import com.techhive.service.TechArticleSearchService;
 import com.techhive.service.TechArticleService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class TechArticleController {
 
     private final TechArticleService techArticleService;
+    private final TechArticleSearchService searchService;
 
     @GetMapping
-    public TechArticleListResponse getTechArticles() {
-        List<TechArticleEntity> allTechArticleEntities = techArticleService.getAllTechArticles();
+    public TechArticleListResponse getTechArticles(@RequestParam(value = "size", defaultValue = "6", required = false) String size) {
+        List<TechArticleEntity> allTechArticleEntities = techArticleService.getAllTechArticles(Integer.parseInt(size));
         return TechArticleListResponse.from(allTechArticleEntities);
     }
 
@@ -56,9 +58,9 @@ public class TechArticleController {
 
     @GetMapping("/search")
     public TechArticleListResponse getSearchTechArticles(
-        @RequestParam(value = "search") String searchTerm
+        @RequestParam(value = "term") String searchTerm
     ) {
-        List<TechArticleEntity> searchedTechArticles = techArticleService.getSearchTechArticles(searchTerm);
-        return TechArticleListResponse.from(searchedTechArticles);
+        List<TechArticleEntity> searchTechArticles = searchService.getSearchTechArticles(searchTerm);
+        return TechArticleListResponse.from(searchTechArticles);
     }
 }

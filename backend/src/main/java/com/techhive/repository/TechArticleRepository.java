@@ -2,6 +2,7 @@ package com.techhive.repository;
 
 import com.techhive.entity.TechArticleEntity;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -26,4 +27,6 @@ public interface TechArticleRepository extends JpaRepository<TechArticleEntity, 
 
     @Query(value = "SELECT * FROM tech_articles ORDER BY RAND() LIMIT :limit", nativeQuery = true)
     List<TechArticleEntity> findRandomTechArticles(@Param("limit") int limit);
+
+    List<TechArticleEntity> findByOrderByPublishedDateDesc(Pageable pageable);
 }
