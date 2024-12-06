@@ -1,0 +1,125 @@
+.side-bar {
+    width: 12.5vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    margin-left: 2em;
+    box-sizing: border-box;
+}
+
+.side-selection {
+    width: 100%;
+    height: 3.5vh;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ACAEB5;
+    padding-left: 8px;
+}
+
+.side-selection > div {
+    width: 100%;
+    display: flex;
+}
+
+.selection-text {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-left: 0.625vw;
+}
+
+.side-bar img {
+    width: 1.05vw;
+    height: 1.05vw;
+    object-fit: cover;
+    margin-right: 0.5em;
+}
+
+.side-selection:hover {
+    border-radius: 8px;
+    background-color: #272B33;
+}
+
+.side-selection.active {
+    color: #FFC52E;
+}
+
+.side-bar-line {
+    background: #272B33;
+    height: 2px;
+    width: 10.5vw;
+    border: 0;
+    margin: 3.14vh 0 1.85vh 0;
+}
+
+.side-bar-company-title {
+    color: #616875;
+    font-size: 0.875rem;
+    margin-bottom: 0.55vh;
+}
+
+.side-bar-company-list-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.side-bar-company-list-box:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.company-list-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 4.8vh;
+}
+
+.company-box {
+    width: 1.9vw;
+    height: 3.4vh;
+    border: 2px solid;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 1px;
+}
+
+.company-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.company-name {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 0.875rem;
+    text-align: center;
+    white-space: nowrap;
+    margin-left: 8px;
+}
+
+.expand-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 4px;
+    font-size: 0.875rem;
+    background-color: #141517;
+    color: #979AA4;
+    border: none;
+    cursor: pointer;
+}
+
+.expand-button > span {
+    margin-right: 5px;
+}
+
+.direction-bottom-icon {
+
+}

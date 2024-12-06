@@ -1,0 +1,64 @@
+.tech-article-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 1.75vw;
+    padding-right: 3.1vw;
+    padding-bottom: 17.7vh;
+    overflow-y: auto;
+}
+
+.tech-article-header-box {
+    flex-direction: column;
+    border-bottom: 2px solid #2F3138;
+}
+
+.tech-article-header-title {
+    font-size: 1.5rem;
+    padding-bottom: 1.85vh;
+}
+
+.tech-article-order-button-box {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3.7vh;
+    gap: 4px;
+}
+
+.tech-article-order-button-box > a {
+    display: flex;
+    width: 3.75vw;
+    height: 3.05vh;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    background-color: #393E45;
+    color: #E0E3EB;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.tech-article-order-button-box > a.active {
+    background-color: #FFC52E;
+    color: #1D1E21;
+}
+
+.tech-article-order-button-box > a:hover {
+    background-color: #FFC52E;
+    color: #1D1E21;
+}
+
+.tech-article-order-button-box > div > span {
+    font-size: 0.875rem;
+}
+
+.tech-article-list-box {
+    margin-top: 2.22vh;
+    display: grid;
+    grid-template-columns: repeat(4, 19.8vw);
+    gap: 4.4vh 1.15vw; /* column-gap, row-gap */
+    box-sizing: border-box;
+}

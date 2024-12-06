@@ -1,0 +1,105 @@
+.home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    margin-left: 2em;
+    margin-top: 2.5em;
+    margin-bottom: 1.2rem;
+    box-sizing: border-box;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    left: 2em;
+    text-decoration: none;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.tech-hive-logo {
+    display: flex;
+    width: 3.1vw;
+    height: 3.1vw;
+    align-items: center;
+    object-fit: cover;
+}
+
+.text-tech-hive {
+    display: flex;
+    position: relative;
+    top: 0.1vw;
+    left: 0.3em;
+    letter-spacing: 0;
+    line-height: normal;
+}
+
+.text-tech-hive > span {
+    font-size: 1.25rem;
+}
+
+.tech-title {
+    font-weight: 1000;
+    color: #FFFFFF;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 28.33vw;
+    height: 4.5vh;
+    border-radius: 10px;
+    background-color: #25262C;
+    border: 1px solid #31343C;
+    padding: 0 1em;
+    box-sizing: border-box;
+    margin-right: auto;
+    cursor: text;
+    color: #ACAEB5;
+}
+
+.search-text-input {
+    width: 100%;
+    color: #464B57;
+    background-color: #25262C;
+    border: none;
+    outline: none;
+}
+
+.search-icon-button {
+    background-color: #25262C;
+    border: none;
+    cursor: pointer;
+}
+
+.search-icon {
+    width: 0.85vw;
+    height: 1.5vh;
+    pointer-events: none;
+    color: #7E808F;
+}
+
+.search-bar:focus-within {
+    border-color: #FFC52E;
+    color: #FFC52E;
+
+    .search-icon {
+        color: #FFC52E;
+    }
+}
+
+.search-text-input:not(:placeholder-shown) {
+    color: #FFFFFF;
+}
+
+.search-bar:hover {
+    border-color: #FFC52E;
+    color: #FFC52E;
+
+    .search-icon {
+        color: #FFC52E;
+    }
+}

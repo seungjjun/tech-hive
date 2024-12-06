@@ -1,0 +1,12 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.body-container {
+  display: flex;
+  height: calc(100vh - 10vh);
+  overflow: hidden;
+}
+

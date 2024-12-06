@@ -1,0 +1,5 @@
+.main {
+    overflow-y: auto; /* 세로 스크롤 허용 */
+    box-sizing: border-box;
+    color: #FFFFFF;
+}
