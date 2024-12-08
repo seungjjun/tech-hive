@@ -16,10 +16,24 @@ class DateTimeConverter {
         }
 
         const year = date.getFullYear();
-        const month = date.getMonth() + 1; // 월은 0부터 시작하므로 +1
+        const month = date.getMonth() + 1;
         const day = date.getDate();
 
         return `${year}년${month}월${day}일`;
+    }
+
+    static formatToDate(localDateTime) {
+        if (!localDateTime) {
+            throw new Error("유효한 날짜 문자열을 입력해주세요.");
+        }
+        const date = new Date(localDateTime);
+        if (isNaN(date)) {
+            throw new Error("유효한 날짜 형식이 아닙니다.");
+        }
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        return `${year}.${month}.${day}`;
     }
 }
 

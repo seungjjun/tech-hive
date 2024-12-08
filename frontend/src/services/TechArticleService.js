@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 export const fetchTechArticles = async (page, size, sort = 'RECENT') => {
     const response = await fetch(`${API_BASE}/tech-articles?page=${page}&size=${size}&sort=${sort}`);
@@ -8,6 +8,23 @@ export const fetchTechArticles = async (page, size, sort = 'RECENT') => {
     const data = await response.json();
     return data.techArticleResponseList;
 };
+
+export const fetchTechArticleById = async (id) => {
+    const response = await fetch(`${API_BASE}/tech-articles/${id}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch tech articles');
+    }
+    return await response.json();
+}
+
+export const fetchRelatedTechArticlesByCompanyId = async (articleId, companyId) => {
+    const response = await fetch(`${API_BASE}/tech-articles/${articleId}/companies/${companyId}/related`)
+    if (!response.ok) {
+        throw new Error('Failed to fetch tech articles');
+    }
+    const data = await response.json();
+    return data.relatedTechArticles;
+}
 
 export const fetchPopularTechArticles = async () => {
     const response = await fetch(`${API_BASE}/tech-articles/popular`);

@@ -4,9 +4,9 @@ import '../styles/sidebar.css';
 import {fetchCompanies} from "../services/CompanyService";
 import ArticleIcon from "./icons/ArticleIcon";
 import CompanyIcon from "./icons/CompanyIcon";
-import CategoryIcon from "./icons/CategoryIcon";
-import DirectionBottomIcon from "./icons/DirectionBottomIcon";
+import MainIcon from "./icons/MainIcon";
 
+import DirectionBottomIcon from "./icons/DirectionBottomIcon";
 import companyLogos from "../common/CompanyLogos";
 
 const Sidebar = () => {
@@ -20,9 +20,9 @@ const Sidebar = () => {
     };
 
     const selections = [
-        { id: 1, icon: ArticleIcon, label: '전체 글', path: '/articles' },
-        { id: 2, icon: CategoryIcon, label: '카테고리', path: '/companies' },
-        { id: 3, icon: CompanyIcon, label: '기업 별', path: '/category' },
+        { id: 1, icon: MainIcon, label: '메인', path: '/' },
+        { id: 2, icon: ArticleIcon, label: '전체 글', path: '/articles' },
+        { id: 3, icon: CompanyIcon, label: '기업 별', path: '/companies' },
     ];
 
     useEffect(() => {

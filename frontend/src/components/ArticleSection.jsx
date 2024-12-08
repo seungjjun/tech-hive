@@ -13,7 +13,6 @@ const ArticleSection = () => {
     const [page, setPage] = useState(1);
     const [limit] = useState(6);
 
-
     useEffect(() => {
         const getArticles = async () => {
             try {
@@ -47,6 +46,7 @@ const ArticleSection = () => {
             {articles.map((article) => (
                     <ArticleCard
                         key={article.id}
+                        id={article.id}
                         title={article.title}
                         author={article.companyName}
                         views={article.viewCount}

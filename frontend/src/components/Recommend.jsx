@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import '../styles/recommend.css';
 import {fetchRecommendTechArticles} from "../services/TechArticleService";
@@ -49,7 +50,8 @@ const Recommend = () => {
                         companyStyles[article.companyName] ||
                         companyStyles.default;
                     return (
-                        <div
+                        <NavLink
+                            to={`/articles/${article.id}`}
                             key={article.id}
                             className="recommend-article-card"
                             style={{
@@ -68,7 +70,7 @@ const Recommend = () => {
                                 </div>
                                 <p className="card-title">{article.title}</p>
                             </div>
-                        </div>
+                        </NavLink>
                     );
                 })}
             </div>

@@ -1,0 +1,49 @@
+.company-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.company-card:hover {
+    opacity: 0.6;
+}
+
+.company-card-logo-box {
+}
+
+.company-card-logo {
+    width: 100%;
+    height: 29.7vh;
+    border-radius: 1.5rem;
+}
+
+.company-card-name-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.company-card-company-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #E0E3EB;
+    margin-top: 1.3vh;
+}
+
+.company-card-meta-bax {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1.2vh;
+}
+
+.company-card-meta-bax > span {
+    color: #AFB4BF;
+    font-size: 0.875rem;
+}

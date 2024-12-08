@@ -1,0 +1,64 @@
+.company-list-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding-left: 1.75vw;
+    padding-right: 3.1vw;
+    padding-bottom: 17.7vh;
+    overflow-y: auto;
+}
+
+.company-list-header-box {
+    flex-direction: column;
+    border-bottom: 2px solid #2F3138;
+}
+
+.company-list-header-title {
+    font-size: 1.5rem;
+    padding-bottom: 1.85vh;
+}
+
+.company-list-order-button-box {
+    display: flex;
+    flex-direction: row;
+    margin-top: 3.7vh;
+    gap: 4px;
+}
+
+.company-list-order-button-box > a {
+    display: flex;
+    width: 3.75vw;
+    height: 3.05vh;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+
+    background-color: #393E45;
+    color: #E0E3EB;
+    font-weight: 500;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.company-list-order-button-box > a.active {
+    background-color: #FFC52E;
+    color: #1D1E21;
+}
+
+.company-list-order-button-box > a:hover {
+    background-color: #FFC52E;
+    color: #1D1E21;
+}
+
+.company-list-order-button-box > div > span {
+    font-size: 0.875rem;
+}
+
+.company-list-grid-box {
+    margin-top: 2.22vh;
+    display: grid;
+    grid-template-columns: repeat(3, 26.4vw);
+    gap: 5.5vh 1.6vw; /* column-gap, row-gap */
+    box-sizing: border-box;
+}

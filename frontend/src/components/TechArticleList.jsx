@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import {fetchTechArticles} from "../services/TechArticleService";
 
 import InfiniteScroll from '../common/InfiniteScroll';
 
 import ArticleCard from "./ArticleCard";
-import '../styles/techArticles.css';
+import '../styles/techArticleList.css';
 
 const TechArticleList = () => {
-    const { sort } = useParams();
-    const sortOrder = sort ? sort.toUpperCase() : 'RECENT';
+    const [searchParams] = useSearchParams();
+    const sortOrder = (searchParams.get('sort') || 'recent').toUpperCase();
 
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -54,17 +54,21 @@ const TechArticleList = () => {
             </div>
             <div className="tech-article-order-button-box">
                 <NavLink
-                    to="/articles/recent"
-                    className={({ isActive }) =>
-                        isActive ? "tech-article-recent-order-button active" : "tech-article-recent-order-button"
+                    to={`?sort=recent`}
+                    className={() =>
+                        sortOrder === 'RECENT'
+                            ? "tech-article-recent-order-button active"
+                            : "tech-article-recent-order-button"
                     }
                 >
                     <span className="tech-article-recent-order-button-text">최신 순</span>
                 </NavLink>
                 <NavLink
-                    to="/articles/popular"
-                    className={({ isActive }) =>
-                        isActive ? "tech-article-popular-order-button active" : "tech-article-popular-order-button"
+                    to={`?sort=popular`}
+                    className={() =>
+                        sortOrder === 'POPULAR'
+                            ? "tech-article-popular-order-button active"
+                            : "tech-article-popular-order-button"
                     }
                 >
                     <span className="tech-article-popular-order-button-text">인기 순</span>
@@ -77,6 +81,7 @@ const TechArticleList = () => {
                 {articles.map((article, index) => (
                     <ArticleCard
                         key={article.id}
+                        id={article.id}
                         title={article.title}
                         author={article.companyName}
                         views={article.viewCount}

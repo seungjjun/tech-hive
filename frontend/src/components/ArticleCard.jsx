@@ -1,8 +1,11 @@
 import React, { forwardRef } from 'react';
+import { NavLink } from 'react-router-dom';
+
 import '../styles/articleCard.css';
 
 const ArticleCard = forwardRef((props, ref) => {
     const {
+        id,
         title,
         author,
         views,
@@ -16,7 +19,10 @@ const ArticleCard = forwardRef((props, ref) => {
     } = props;
 
     return (
-        <div className="article-card" ref={ref}>
+        <NavLink
+            to={`/articles/${id}`}
+            className="article-card" ref={ref}
+        >
             <div className="thumbnail-img-box">
                 <img className="thumbnail-img" src={thumbnailSrc} alt={`${author} thumbnail image`}/>
             </div>
@@ -37,7 +43,7 @@ const ArticleCard = forwardRef((props, ref) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </NavLink>
     );
 });
 
