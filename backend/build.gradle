@@ -34,6 +34,8 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 
+    implementation 'com.github.mwiede:jsch:0.2.16'
+
     compileOnly 'org.projectlombok:lombok'
 
     runtimeOnly 'com.mysql:mysql-connector-j'
