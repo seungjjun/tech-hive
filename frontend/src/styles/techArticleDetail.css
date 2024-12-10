@@ -60,6 +60,8 @@
 
 .tech-article-detail-company-name {
     color: #D2D7E4;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .tech-article-detail-count-box {
@@ -69,7 +71,15 @@
 }
 
 .tech-article-detail-author-article-count {
+    color: #A8AFC1;
     font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+.tech-article-detail-article-view-count {
+    color: #949AA9;
+    font-size: 1rem;
+    font-weight: 500;
 }
 
 .tech-article-detail-category-box {

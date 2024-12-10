@@ -47,6 +47,7 @@
     font-size: 0.875rem;
     color: #9FA3AD;
 
+    line-height: 1.35;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;

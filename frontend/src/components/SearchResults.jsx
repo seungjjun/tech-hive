@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import {fetchSearchTechArticles} from "../services/SearchService";
 
 import InfiniteScroll from '../common/InfiniteScroll';
@@ -65,9 +65,10 @@ const SearchResults = () => {
                                 onLoadMore={loadMore}
                                 className={"search-result-tech-article-box"}>
                     {searchTechArticles.map((article, index) => (
-                        <div
-                            className="search-article-card"
+                        <NavLink
+                            to={`/articles/${article.id}`}
                             key={article.id}
+                            className="search-article-card"
                         >
                             <div className="article-card-logo-box">
                                 <div className="article-card-logo-img-box">
@@ -97,7 +98,7 @@ const SearchResults = () => {
                                 <span>·</span>
                                 <span>{article.viewCount}회</span>
                             </div>
-                        </div>
+                        </NavLink>
                     ))}
                 </InfiniteScroll>
                 {loading && <div className="loading">로딩 중...</div>}

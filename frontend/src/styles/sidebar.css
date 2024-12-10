@@ -17,6 +17,7 @@
     text-decoration: none;
     color: #ACAEB5;
     padding-left: 8px;
+    font-weight: bold;
 }
 
 .side-selection > div {
@@ -47,6 +48,7 @@
 
 .side-selection.active {
     color: #FFC52E;
+    font-weight: 900;
 }
 
 .side-bar-line {
@@ -103,6 +105,7 @@
     text-align: center;
     white-space: nowrap;
     margin-left: 8px;
+    color: #D2D7E4;
 }
 
 .expand-button {

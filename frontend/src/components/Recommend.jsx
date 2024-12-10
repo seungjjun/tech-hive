@@ -2,21 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import '../styles/recommend.css';
+import "../common/CompanyPrimaryColor";
 import {fetchRecommendTechArticles} from "../services/TechArticleService";
+import companyPrimaryColor from "../common/CompanyPrimaryColor";
 
 const Recommend = () => {
 
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const companyStyles = {
-        Toss: { backgroundColor: '#0050FF', color: '#FFFFFF' },
-        Woowahan: { backgroundColor: '#FFFFFF', color: '#000000' },
-        Kakao: { backgroundColor: '#FEE500', color: '#FFFFFF' },
-        Naver: { backgroundColor: '#00C83A', color: '#FFFFFF' },
-        default: { backgroundColor: '#CCCCCC', color: '#000000' },
-    };
 
     useEffect(() => {
         const getArticles = async () => {
@@ -47,8 +41,8 @@ const Recommend = () => {
             <div className="recommend-article-card-list">
                 {articles.map((article) => {
                     const style =
-                        companyStyles[article.companyName] ||
-                        companyStyles.default;
+                        companyPrimaryColor[article.companyName] ||
+                        companyPrimaryColor.default;
                     return (
                         <NavLink
                             to={`/articles/${article.id}`}

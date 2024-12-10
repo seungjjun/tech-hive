@@ -11,8 +11,9 @@ import TechArticleDetail from "./components/TechArticleDetail";
 import './App.css'
 
 function BodyContainer() {
-    const match = useMatch('/articles/:id');
-    const hideSidebar = !!match;
+    const articleMatch = useMatch('/articles/:id');
+    const searchMatch = useMatch('/search');
+    const hideSidebar = !!articleMatch || !!searchMatch;
 
     return (
         <div className="body-container">

@@ -4,10 +4,12 @@ import {NavLink, useParams} from 'react-router-dom';
 import companyLogos from "../common/CompanyLogos";
 import "../styles/techArticleDetail.css"
 import {fetchRelatedTechArticlesByCompanyId, fetchTechArticleById} from "../services/TechArticleService";
+import {fetchCompany} from "../services/CompanyService";
 
 const TechArticleDetail = () => {
     const {id} = useParams();
     const [article, setArticle] = useState([]);
+    const [company, setCompany] = useState([]);
     const [companyId, setCompanyId] = useState(null);
     const [threeLineSummary, setThreeLineSummary] = useState([]);
     const [relatedArticles, setRelatedArticles] = useState([]);
@@ -42,7 +44,24 @@ const TechArticleDetail = () => {
     }, [id, companyId]);
 
     useEffect(() => {
-        if (!companyId) return; // companyId가 설정되지 않았으면 실행하지 않음
+        if (!companyId) return;
+
+        const getCompany = async () => {
+            try {
+                const data = await fetchCompany(companyId);
+                setCompany(data);
+            } catch (err) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        getCompany();
+    }, [companyId]);
+
+    useEffect(() => {
+        if (!companyId) return;
 
         const getRelatedArticles = async () => {
             setRelatedLoading(true);
@@ -75,8 +94,8 @@ const TechArticleDetail = () => {
                         <div className="tech-article-detail-author-and-date-box">
                             <span className="tech-article-detail-company-name">{article.companyName}</span>
                             <div className="tech-article-detail-count-box">
-                                <span className="tech-article-detail-author-article-count">작성글 1</span>
-                                <span>{article.viewCount}회</span>
+                                <span className="tech-article-detail-author-article-count">작성글 {company.articleNumber}</span>
+                                <span className="tech-article-detail-article-view-count">{article.viewCount}회</span>
                             </div>
                         </div>
                     </div>

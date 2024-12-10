@@ -7,14 +7,15 @@
 }
 
 .ranking-box-title {
-    font-weight: bold;
+    font-weight: 600;
     font-size: 1.5rem;
-    margin-bottom: 2.3vh;
+    margin-bottom: 2.2vh;
 }
 
 .top-rank-article {
     width: 20.5vw;
     height: 13.5vh;
+    padding: 1.85vh 0;
     border-bottom: 2px solid #2F3138;
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -25,11 +26,12 @@
     border-radius: 8px;
 }
 
-.top-rank-article > div {
+.top-rank-article-box {
     display: flex;
     flex-direction: row;
     width: 20.5vw;
     height: 9.3vh;
+    text-decoration: none;
 }
 
 .top-rank-article-img-box {
@@ -38,16 +40,6 @@
     height: 9.3vh;
     overflow: visible;
 }
-
-/*.crown-icon {*/
-/*    position: absolute;*/
-/*    top: -12%;*/
-/*    left: 50%;*/
-/*    transform: translateX(-50%);*/
-/*    z-index: 2;*/
-/*    width: 25%;*/
-/*    height: auto;*/
-/*}*/
 
 .top-rank-article-img {
     width: 100%;
@@ -80,6 +72,7 @@
 .top-rank-article-title {
     font-size: 1.25rem;
     font-weight: 600;
+    color: #E1E5EF;
 }
 
 .top-rank-article-meta {
@@ -87,14 +80,22 @@
     justify-content: space-between;
 }
 
+.ranking-article-title-text {
+    font-size: 1rem;
+    color: #E1E5EF;
+    font-weight: 600;
+}
+
 .rank-article-company-name {
-    color: #9FA5B5;
+    color: #C3C3C3;
     font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .rank-article-view-count {
-    color: #A9A9A9;
+    color: #929394;
     font-size: 0.875rem;
+    font-weight: 500;
 }
 
 .ranking-article-line {
@@ -113,9 +114,10 @@
 .rank-article-box {
     display: flex;
     flex-direction: row;
-    padding: 20px 15px;
+    padding: 1.85vh 0.8vw;
     border-bottom: 2px solid #2F3138;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .rank-article-box:hover {
