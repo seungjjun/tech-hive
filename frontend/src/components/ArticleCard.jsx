@@ -2,6 +2,7 @@ import React, { forwardRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import '../styles/articleCard.css';
+import companyLogos from "../common/CompanyLogos";
 
 const ArticleCard = forwardRef((props, ref) => {
     const {
@@ -9,7 +10,6 @@ const ArticleCard = forwardRef((props, ref) => {
         title,
         author,
         views,
-        logoSrc,
         date,
         oneLineSummary,
         threeLineSummary,
@@ -36,7 +36,7 @@ const ArticleCard = forwardRef((props, ref) => {
                     <img className="article-meta-line" src="/assets/icon/line.svg" alt="line-svg"/>
                     <div className="article-author-view-box">
                         <div className="article-author-box">
-                            <img className="article-author-logo" src={logoSrc} alt={`${logoSrc} logo`}/>
+                            <img className="article-author-logo" src={companyLogos[author]} alt={`${author} logo`}/>
                             <span className="article-author">{author}</span>
                         </div>
                         <span className="article-view-count">{views.toLocaleString()} 회</span>

@@ -32,6 +32,8 @@ const CompanyDetail = () => {
 
     useEffect(() => {
         const getCompany = async () => {
+            setLoading(true);
+            setError(null);
             try {
                 const data = await fetchCompany(id);
                 setCompany(data);
@@ -42,7 +44,7 @@ const CompanyDetail = () => {
             }
         };
         getCompany();
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         const getArticles = async () => {
@@ -61,7 +63,7 @@ const CompanyDetail = () => {
             }
         };
         getArticles();
-    }, [page, limit, sort]);
+    }, [id, page, limit, sort]);
 
     const loadMore = () => {
         setPage(prevPage => prevPage + 1);

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {NavLink} from 'react-router-dom';
 import '../styles/sidebar.css';
 import {fetchCompanies} from "../services/CompanyService";
 import ArticleIcon from "./icons/ArticleIcon";
@@ -11,8 +11,8 @@ import companyLogos from "../common/CompanyLogos";
 
 const Sidebar = () => {
     const [companies, setCompanies] = useState([]);
-    const [loading, setLoading] = useState(true); // Optional: For loading state
-    const [error, setError] = useState(null);     // Optional: For error handling
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [visibleCount, setVisibleCount] = useState(5);
 
     const handleExpand = () => {
@@ -20,9 +20,9 @@ const Sidebar = () => {
     };
 
     const selections = [
-        { id: 1, icon: MainIcon, label: '메인', path: '/' },
-        { id: 2, icon: ArticleIcon, label: '전체 글', path: '/articles' },
-        { id: 3, icon: CompanyIcon, label: '기업 별', path: '/companies' },
+        {id: 1, icon: MainIcon, label: '메인', path: '/'},
+        {id: 2, icon: ArticleIcon, label: '전체 글', path: '/articles'},
+        {id: 3, icon: CompanyIcon, label: '기업 별', path: '/companies'},
     ];
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const Sidebar = () => {
             }
         };
         getCompanies();
-    },  []);
+    }, []);
 
     if (loading) {
         return <div>Loading articles...</div>;
@@ -73,26 +73,27 @@ const Sidebar = () => {
             <div className="side-bar-company-list-box">
                 <div>
                     {companies.slice(0, visibleCount).map((company, index) => (
-                        <div key={index} className="company-list-wrapper">
+                        <NavLink
+                            to={`/companies/${company.id}`}
+                            key={`${company.id}-${Date.now()}`}
+                            className="company-list-wrapper"
+                        >
                             <div
-                                className="company-box"
-                                style={{
-                                    borderColor: company.name ? '#FFB627' : '#676767',
-                                }}
+                                className={`company-box ${company.isUpdated ? 'updated' : 'not-updated'}`}
                             >
                                 <img
                                     src={companyLogos[company.name] || companyLogos.default}
                                     alt={`${company.name || 'Unknown'} Logo`}
                                 />
                             </div>
-                            <span className="company-name">{company.name || 'Tech Hive'}</span>
-                        </div>
+                            <span className={`company-name ${company.isUpdated ? 'updated' : 'not-updated'}`}>{company.name || 'Tech Hive'}</span>
+                        </NavLink>
                     ))}
                 </div>
                 {visibleCount < companies.length && (
                     <button onClick={handleExpand} className="expand-button">
                         <span>펼치기</span>
-                        <DirectionBottomIcon className="direction-bottom-icon" />
+                        <DirectionBottomIcon className="direction-bottom-icon"/>
                     </button>
                 )}
             </div>

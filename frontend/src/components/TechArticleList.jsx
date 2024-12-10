@@ -85,7 +85,6 @@ const TechArticleList = () => {
                         title={article.title}
                         author={article.companyName}
                         views={article.viewCount}
-                        logoSrc={`/assets/img/${article.companyName.toLowerCase()}-logo.png`}
                         date={new Date(article.publishedDate).toLocaleDateString()}
                         oneLineSummary={article.oneLineSummary}
                         threeLineSummary={JSON.parse(article.threeLineSummary)}

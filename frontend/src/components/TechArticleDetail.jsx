@@ -58,7 +58,7 @@ const TechArticleDetail = () => {
         };
 
         getCompany();
-    }, [companyId]);
+    }, [id, companyId]);
 
     useEffect(() => {
         if (!companyId) return;
@@ -77,7 +77,7 @@ const TechArticleDetail = () => {
         };
 
         getRelatedArticles();
-    }, [companyId]);
+    }, [id, companyId]);
 
     return (
         <div className="tech-article-detail-box">
