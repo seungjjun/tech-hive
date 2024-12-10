@@ -2,7 +2,7 @@
 const companyLogos = {
     Naver: '/assets/img/naver-logo.png',
     Toss: '/assets/img/toss-logo.png',
-    Kakao: '/assets/img/koko-logo.png',
+    Kakao: '/assets/img/kakao-logo.png',
     Line: '/assets/img/line-logo.png',
     Daangn: '/assets/img/daangn-logo.png',
     Woowahan: '/assets/img/woowahan-logo.png',
