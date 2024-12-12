@@ -41,7 +41,7 @@ const CompanyList = () => {
             }
         };
         getCompanies();
-    }, [page, limit, sortOrder]);
+    }, [companies, page, limit, sortOrder]);
 
     const loadMore = () => {
         setPage(prevPage => prevPage + 1);

@@ -54,7 +54,7 @@ const ArticleSection = () => {
                         date={new Date(article.publishedDate).toLocaleDateString()}
                         oneLineSummary={article.oneLineSummary}
                         threeLineSummary={JSON.parse(article.threeLineSummary)}
-                        coreSummary={JSON.parse(article.coreSummary)}
+                        coreSummary={article.coreSummary}
                         link={article.link}
                         thumbnailSrc={article.imageUrl}
                     />

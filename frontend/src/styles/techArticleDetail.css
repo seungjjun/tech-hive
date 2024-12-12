@@ -133,8 +133,10 @@
 }
 
 .tech-article-detail-core-text {
+    white-space: pre-line;
     margin-top: 1.48vh;
     font-size: 1.125rem;
+    line-height: 1.5;
     color: #AFB3BD;
 }
 
