@@ -12,6 +12,7 @@ const TechArticleDetail = () => {
     const [company, setCompany] = useState([]);
     const [companyId, setCompanyId] = useState(null);
     const [threeLineSummary, setThreeLineSummary] = useState([]);
+    const [coreSummary, setCoreSummary] = useState([]);
     const [relatedArticles, setRelatedArticles] = useState([]);
 
     const [loading, setLoading] = useState(true);
@@ -28,10 +29,13 @@ const TechArticleDetail = () => {
                 if (data.threeLineSummary) {
                     try {
                         const parsedSummary = JSON.parse(data.threeLineSummary);
+                        const coreSummary = JSON.parse(data.coreSummary);
                         setThreeLineSummary(parsedSummary);
+                        setCoreSummary(coreSummary);
                     } catch (parseError) {
-                        console.error('threeLineSummary 파싱 실패:', parseError);
+                        console.error('파싱 실패:', parseError);
                         setThreeLineSummary([]);
+                        setCoreSummary([]);
                     }
                 }
             } catch (error) {
@@ -41,7 +45,7 @@ const TechArticleDetail = () => {
             }
         };
         getArticle();
-    }, [id, companyId]);
+    }, [id]);
 
     useEffect(() => {
         if (!companyId) return;
@@ -58,7 +62,7 @@ const TechArticleDetail = () => {
         };
 
         getCompany();
-    }, [id, companyId]);
+    }, [companyId]);
 
     useEffect(() => {
         if (!companyId) return;
@@ -118,7 +122,18 @@ const TechArticleDetail = () => {
                     </div>
                     <div className="tech-article-detail-core-text-box">
                         <h3 className="tech-article-detail-core">📝 핵심 내용</h3>
-                        <p className="tech-article-detail-core-text">{article.coreSummary}</p>
+                        {coreSummary.map((section, index) => (
+                            <div key={index} className="tech-article-detail-core-summary-section">
+                                <h4 className="tech-article-detail-core-summary-title">{section.title}</h4>
+                                <ul className="tech-article-detail-core-summary-list">
+                                    {section.summaries.map((summary, idx) => (
+                                        <p key={idx} className="tech-article-detail-core-summary-item">
+                                            {summary}
+                                        </p>
+                                    ))}
+                                </ul>
+                            </div>
+                        ))}
                     </div>
                     <div className="tech-article-detail-three-line-summary-text-box">
                         <h3 className="tech-article-detail-three-line-summary">🗒 세줄 요약</h3>
