@@ -13,10 +13,18 @@ const Sidebar = () => {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [visibleCount, setVisibleCount] = useState(5);
 
-    const handleExpand = () => {
-        setVisibleCount((prevCount) => Math.min(prevCount + 5, companies.length));
+    const initialVisibleCount = 5; // 초기에 보여줄 기업 개수 설정
+    const [visibleCount, setVisibleCount] = useState(initialVisibleCount);
+    const [isExpanded, setIsExpanded] = useState(false);
+
+    const handleToggle = () => {
+        if (isExpanded) {
+            setVisibleCount(initialVisibleCount);
+        } else {
+            setVisibleCount(companies.length);
+        }
+        setIsExpanded(!isExpanded);
     };
 
     const selections = [
@@ -72,28 +80,33 @@ const Sidebar = () => {
             <p className="side-bar-company-title">새로 올라온</p>
             <div className="side-bar-company-list-box">
                 <div>
-                    {companies.slice(0, visibleCount).map((company, index) => (
+                    {companies.slice(0, visibleCount).map((company) => (
                         <NavLink
                             to={`/companies/${company.id}`}
-                            key={`${company.id}-${Date.now()}`}
+                            key={company.id} // 고유하고 안정적인 키 사용
                             className="company-list-wrapper"
                         >
-                            <div
-                                className={`company-box ${company.isUpdated ? 'updated' : 'not-updated'}`}
-                            >
+                            <div className={`company-box ${company.isUpdated ? 'updated' : 'not-updated'}`}>
                                 <img
                                     src={companyLogos[company.name] || companyLogos.default}
                                     alt={`${company.name || 'Unknown'} Logo`}
+                                    onError={(e) => {
+                                        e.target.src = companyLogos.default;
+                                    }}
                                 />
                             </div>
-                            <span className={`company-name ${company.isUpdated ? 'updated' : 'not-updated'}`}>{company.name || 'Tech Hive'}</span>
+                            <span className={`company-name ${company.isUpdated ? 'updated' : 'not-updated'}`}>
+                            {company.name || 'Tech Hive'}
+                        </span>
                         </NavLink>
                     ))}
                 </div>
-                {visibleCount < companies.length && (
-                    <button onClick={handleExpand} className="expand-button">
-                        <span>펼치기</span>
-                        <DirectionBottomIcon className="direction-bottom-icon"/>
+                {companies.length > initialVisibleCount && (
+                    <button onClick={handleToggle} className="expand-button">
+                        <span>{isExpanded ? '접기' : '펼치기'}</span>
+                        <DirectionBottomIcon
+                            className={`direction-bottom-icon ${isExpanded ? 'rotated' : ''}`}
+                        />
                     </button>
                 )}
             </div>

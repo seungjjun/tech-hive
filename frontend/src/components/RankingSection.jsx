@@ -29,6 +29,7 @@ const RankingSection = () => {
                         key={popularArticles[0].id}
                         className="top-rank-article-box"
                     >
+                        <span className="top-rank-article-number">1</span>
                         <div className="top-rank-article-img-box">
                             <img className="top-rank-article-img"
                                  src={popularArticles[0].imageUrl}

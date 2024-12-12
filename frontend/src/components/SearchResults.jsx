@@ -21,7 +21,6 @@ const SearchResults = () => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        // 검색어가 변경되면 초기 상태로 되돌림
         setSearchTechArticles([]);
         setPage(1);
         setHasMore(true);

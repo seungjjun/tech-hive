@@ -34,6 +34,14 @@
     text-decoration: none;
 }
 
+.top-rank-article-number {
+    color: #FFC52E;
+    font-weight: 700;
+    font-size: 1.5rem;
+    align-content: center;
+    margin: 0 0.4vw 0 0.2vw;
+}
+
 .top-rank-article-img-box {
     position: relative;
     width: 5.2vw;

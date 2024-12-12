@@ -14,7 +14,7 @@ const CompanyDetail = () => {
     const [searchParams] = useSearchParams();
     const sort = (searchParams.get('sort') || 'recent').toUpperCase();
 
-    const [company, setCompany] = useState([]);
+    const [company, setCompany] = useState({});
     const [articles, setArticles] = useState([]);
 
     const [hasMore, setHasMore] = useState(true);
@@ -28,7 +28,9 @@ const CompanyDetail = () => {
         setPage(1);
         setHasMore(true);
         setArticles([]);
-    }, [sort]);
+        setLoading(true);
+        setError(null);
+    }, [id, sort]);
 
     useEffect(() => {
         const getCompany = async () => {

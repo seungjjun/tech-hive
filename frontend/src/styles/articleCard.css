@@ -90,6 +90,7 @@
     width: 1.25vw;
     height: 2.22vh;
     border-radius: 50%;
+    object-fit: cover;
 }
 
 .article-author {

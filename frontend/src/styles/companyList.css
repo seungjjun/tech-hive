@@ -59,7 +59,7 @@
 .company-list-grid-box {
     margin-top: 2.22vh;
     display: grid;
-    grid-template-columns: repeat(3, 26.4vw);
+    grid-template-columns: repeat(4, 19.47vw);
     gap: 5.5vh 1.6vw; /* column-gap, row-gap */
     box-sizing: border-box;
 }

@@ -41,7 +41,7 @@ const CompanyList = () => {
             }
         };
         getCompanies();
-    }, [companies, page, limit, sortOrder]);
+    }, [page, limit, sortOrder]);
 
     const loadMore = () => {
         setPage(prevPage => prevPage + 1);
@@ -81,7 +81,7 @@ const CompanyList = () => {
                         name={company.name}
                         articleCount={company.techArticleCount}
                         articleLatestPublishedDate={company.latestPublishedDate}
-                        logo={`/assets/img/${company.name.toLowerCase()}-logo.png`}
+                        logo={`/assets/icon/${company.name.toLowerCase()}-logo.svg`}
                     />
                 ))}
             </InfiniteScroll>
