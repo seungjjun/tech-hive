@@ -81,10 +81,18 @@
     font-size: 1.25rem;
     font-weight: 600;
     color: #E1E5EF;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .top-rank-article-meta {
     display: flex;
+    width: 100%;
     justify-content: space-between;
 }
 
@@ -92,6 +100,13 @@
     font-size: 1rem;
     color: #E1E5EF;
     font-weight: 600;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .rank-article-company-name {
@@ -162,6 +177,7 @@
 
 .rank-article-meta-box {
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
 }
