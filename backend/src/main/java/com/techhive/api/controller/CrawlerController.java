@@ -1,34 +1,28 @@
 package com.techhive.api.controller;
 
-import com.techhive.api.dto.WebCrawlingResult;
 import com.techhive.model.CompanyType;
-import com.techhive.model.openai.TechArticleSummaryBody;
-import com.techhive.service.TechArticleSummarizingService;
-import com.techhive.service.TechArticleService;
-import com.techhive.service.crawler.TossTechArticleCrawler;
+import com.techhive.service.crawler.ArticleCrawler;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequestMapping("crawler")
 @RequiredArgsConstructor
 public class CrawlerController {
 
-    private final TechArticleSummarizingService techArticleSummarizingService;
-    private final TechArticleService techArticleService;
-
-    private final TossTechArticleCrawler tossTechArticleCrawler;
+    private final ArticleCrawler crawler;
 
     @PostMapping
     public void crawlerTechArticle(
         @RequestParam(value = "url") String url,
-        @RequestParam(value = "company") CompanyType companyType) throws IOException {
-        WebCrawlingResult result = tossTechArticleCrawler.crawling(url);
-        TechArticleSummaryBody body  = techArticleSummarizingService.generateTechArticleSummary(result.content());
-        techArticleService.saveTechArticle(companyType, result, body);
+        @RequestParam(value = "company") CompanyType companyType
+    ) throws IOException {
+        crawler.crawling(url, companyType);
     }
 }

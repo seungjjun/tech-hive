@@ -1,5 +1,6 @@
 package com.techhive.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -8,9 +9,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,9 +35,8 @@ public class TechArticleEntity {
     @JoinColumn(name = "company_id")
     private CompanyEntity company;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
-    private CategoryEntity category;
+    @OneToMany(mappedBy = "techArticle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TechArticleCategoryEntity> techArticleCategories = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "og_meta_tag_id")
@@ -61,7 +66,6 @@ public class TechArticleEntity {
     private LocalDateTime publishedDate;
 
     public TechArticleEntity(CompanyEntity company,
-                             CategoryEntity category,
                              OgMetaTagEntity ogMetaTag,
                              String title,
                              String link,
@@ -71,7 +75,6 @@ public class TechArticleEntity {
                              String thumbnailImageUrl,
                              LocalDateTime publishedDate) {
         this.company = company;
-        this.category = category;
         this.ogMetaTag = ogMetaTag;
         this.title = title;
         this.link = link;
@@ -82,5 +85,9 @@ public class TechArticleEntity {
         this.thumbnailImageUrl = thumbnailImageUrl;
         this.viewCount = 0;
         this.publishedDate = publishedDate;
+    }
+
+    public void addCategory(CategoryEntity category) {
+        techArticleCategories.add(new TechArticleCategoryEntity(this, category));
     }
 }

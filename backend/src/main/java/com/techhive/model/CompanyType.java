@@ -1,18 +1,22 @@
 package com.techhive.model;
 
+import java.util.Arrays;
+import java.util.Optional;
 import lombok.Getter;
 
 @Getter
 public enum CompanyType {
 
-    NAVER(1L, "Naver"),
-    LINE(2L, "Line"),
-    WOOWAHAN(3L, "Woowahan"),
-    TOSS(4L, "Toss"),
-    KAKAO_BANK(5L, "Kakaobank"),
-    KAKAO_PAY(6L, "Kakaopay"),
-    YOGIYO(7L, "Yogiyo"),
-    DAANGN(12L, "Daangn")
+    TOSS(2L, "Toss"),
+    KAKAO(3L, "Kakao"),
+    DAANGN(5L, "Daangn"),
+    WOOWAHAN(6L, "우아한형제들"),
+    YOGIYO(7L, "요기요"),
+    KURLY(8L, "Kurly"),
+    YEOGI(9L, "여기어때"),
+    MUSINSA(10L, "무신사"),
+    GANGNAM_UNNI(11L, "강남언니"),
+    UNKNOWN(99L, "Unknown")
     ;
 
     private final Long id;
@@ -22,4 +26,11 @@ public enum CompanyType {
         this.id = id;
         this.displayName = displayName;
     }
+
+    public static Optional<CompanyType> fromName(String name) {
+        return Arrays.stream(CompanyType.values())
+            .filter(type -> type.name().equalsIgnoreCase(name))
+            .findFirst();
+    }
+
 }

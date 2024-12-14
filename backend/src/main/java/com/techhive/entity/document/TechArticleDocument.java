@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
-@Document(indexName = "tech_articles")
+@Document(indexName = "tech_articles", createIndex = false)
 @Getter
 @NoArgsConstructor
 public class TechArticleDocument {

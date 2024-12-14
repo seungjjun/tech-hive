@@ -1,4 +1,4 @@
-package com.techhive.service.crawler;
+package com.techhive.service.converter;
 
 import com.techhive.api.dto.WebCrawlingResult;
 import com.techhive.entity.OgMetaTagEntity;
@@ -11,7 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;

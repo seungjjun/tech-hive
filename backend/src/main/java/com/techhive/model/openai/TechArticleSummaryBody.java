@@ -6,6 +6,7 @@ import java.util.List;
 public record TechArticleSummaryBody(
     @SerializedName("one_line_summary") String oneLineSummary,
     @SerializedName("three_line_summary") List<String> threeLineSummary,
-    @SerializedName("core_summary") List<CoreSummaryItem> coreSummary
+    @SerializedName("core_summary") List<CoreSummaryItem> coreSummaryItems,
+    @SerializedName("categories") Category categories
     ) {
 }

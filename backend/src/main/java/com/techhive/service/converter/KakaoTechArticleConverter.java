@@ -10,35 +10,36 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
-public class WoowahanTechArticleConverter implements TechArticleConverter {
+public class KakaoTechArticleConverter implements TechArticleConverter {
 
-    private static final String WOOWAHAN_BASE_URL = "https://techblog.woowahan.com";
+    private static final String KAKAO_BASE_URL  = "https://tech.kakaopay.com";
 
-    private static final DateTimeFormatter ENG_FORMATTER = DateTimeFormatter.ofPattern("MMM'.'dd'.'yyyy", Locale.ENGLISH);
+    private static final DateTimeFormatter ENG_FORMATTER = DateTimeFormatter.ofPattern("yyyy. MM. dd", Locale.ENGLISH);
 
+    @Override
     public WebCrawlingResult convertFrom(Document document, String webUrl) throws IOException {
-        Elements header = document.getElementsByClass("post-header");
-        String title = header.select("h1").text();
-        Elements headerMeta = document.getElementsByClass("post-header-author");
-        String publishedDate = headerMeta.select("span:nth-child(1)").text();
+        String title = document.selectFirst("h1.astro-QLFJKSAO").text();
+        String publishedDate = document.selectFirst("time.astro-QLFJKSAO").text();
         LocalDateTime dateTime = DateUtils.convertToLocalDateTimeFromDate(publishedDate, ENG_FORMATTER);
         OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document, webUrl);
 
-        String imageUrl = CrawlerUtils.getFirstImageUrl(document.select("img[alt='']"), WOOWAHAN_BASE_URL);
+        String imageUrl = CrawlerUtils.getFirstImageUrl(document.select("img[alt='']"), KAKAO_BASE_URL);
 
         if (!StringUtils.hasText(imageUrl)) {
             imageUrl = ogTagMeta.getImageUrl();
         }
 
-        Elements body = document.getElementsByClass("post-content-body");
+        Elements body = document.getElementsByClass("container astro-W4P2PMHA");
         StringBuilder contents = new StringBuilder();
         for (Element e : body) {
             contents.append(e.text()).append("\n");
@@ -53,6 +54,4 @@ public class WoowahanTechArticleConverter implements TechArticleConverter {
             webUrl
         );
     }
-
-
 }

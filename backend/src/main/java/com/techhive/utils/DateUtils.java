@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 public class DateUtils {
 
     private static final ZoneId SEOUL_ZONE_ID = ZoneId.of("Asia/Seoul");
-    
+
     public static LocalDateTime convertToLocalDateTimeFromDate(String date, DateTimeFormatter dateTimeFormatter) {
         LocalTime currentTime = LocalTime.now();
         return LocalDate.parse(date, dateTimeFormatter).atTime(currentTime);

@@ -7,7 +7,6 @@ public record WebCrawlingResult(
     String title,
     LocalDateTime dateTime,
     OgMetaTagEntity ogMetaTag,
-    String category,
     String thumbnailImageUrl,
     String content,
     String url

@@ -17,15 +17,15 @@ import org.springframework.util.StringUtils;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class DaangnTechArticleConverter implements TechArticleConverter {
+public class MediumTechArticleConverter implements TechArticleConverter {
 
-    private final static String DAANGN_BASE_URL = "https://medium.com/daangn";
+    // daangn, yogiyo, musinsa, yeogi
 
     @Override
-    public WebCrawlingResult convertFrom(Document document, String webUrl) throws IOException {
+    public WebCrawlingResult convertFrom(Document document, String url) throws IOException {
         String title = document.selectFirst("h1[data-testid=storyTitle]").text();
         LocalDateTime dateTime = extractPublishedDateTime(document);
-        OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document, webUrl);
+        OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document, url);
         String content = extractContent(document);
         String thumbnailImageUrl = extractThumbnailImageUrl(document.selectFirst("source[data-testid=og]"));
 
@@ -39,9 +39,24 @@ public class DaangnTechArticleConverter implements TechArticleConverter {
             ogTagMeta,
             thumbnailImageUrl,
             content,
-            webUrl
+            url
         );
     }
+
+//    public WebCrawlingResult test() {
+//        List<OriginTechArticleEntity> originTechArticleList = repository.findByStatus(OriginTechArticleStatus.UN_SUMMARIZED);
+//
+//        for (OriginTechArticleEntity originTechArticle : originTechArticleList) {
+//            CompanyType companyType = CompanyType.fromName(originTechArticle.getCompanyName()).orElse(CompanyType.UNKNOWN);
+//            if (companyType.equals(CompanyType.UNKNOWN)) {
+//                log.debug("This company of tech article is unknown. company name: {}", originTechArticle.getCompanyName());
+//                continue;
+//            }
+//
+//            Document document = Jsoup.parse(originTechArticle.getOriginArticle());
+//            techArticleDocumentConverter.convertToResultFrom(companyType, document, originTechArticle.getLink());
+//        }
+//    }
 
     private static String extractContent(Document document) {
         StringBuilder contents = new StringBuilder();

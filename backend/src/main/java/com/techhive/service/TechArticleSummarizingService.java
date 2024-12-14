@@ -32,7 +32,6 @@ public class TechArticleSummarizingService {
         List<ChatRequest.Message> ChatMessages = new ArrayList<>();
         ChatRequest.ChatRequestBuilder request = ChatRequest.builder();
         try {
-
             TechArticlePromptBuilder builder = new TechArticlePromptBuilder(data);
             String prompt = builder.generatePrompt();
 
@@ -48,7 +47,7 @@ public class TechArticleSummarizingService {
             chatResponse = restTemplate.postForObject(apiUrl, chatRequest, ChatResponse.class);
             String content = chatResponse.choices().get(0).message().content();
             return GSON.fromJson(content, TechArticleSummaryBody.class);
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException("Tech article summarization failed." + e.getMessage());
         }
     }

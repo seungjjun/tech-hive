@@ -1,4 +1,4 @@
-package com.techhive.service.crawler;
+package com.techhive.service.converter;
 
 import com.techhive.api.dto.WebCrawlingResult;
 import java.io.IOException;

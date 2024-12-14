@@ -1,5 +1,7 @@
 package com.techhive.api.dto.response.company;
 
+import com.techhive.model.CompanyType;
+
 public record CompanyDetailResponse(
     Long id,
     String name,
@@ -8,7 +10,7 @@ public record CompanyDetailResponse(
     public static CompanyDetailResponse from(CompanyDetailResult result) {
         return new CompanyDetailResponse(
             result.companyEntity().getId(),
-            result.companyEntity().getName(),
+            CompanyType.fromName(result.companyEntity().getName()).orElse(CompanyType.UNKNOWN).getDisplayName(),
             result.articleNumber()
         );
     }
