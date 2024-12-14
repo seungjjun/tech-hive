@@ -10,32 +10,33 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import lombok.RequiredArgsConstructor;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 @RequiredArgsConstructor
-public class WoowahanTechArticleCrawler implements TechArticleCrawler {
+public class WoowahanTechArticleConverter implements TechArticleConverter {
 
     private static final String WOOWAHAN_BASE_URL = "https://techblog.woowahan.com";
 
     private static final DateTimeFormatter ENG_FORMATTER = DateTimeFormatter.ofPattern("MMM'.'dd'.'yyyy", Locale.ENGLISH);
 
-    public WebCrawlingResult crawling(String webUrl) throws IOException {
-        Document document = Jsoup.connect(webUrl).get();
-
+    public WebCrawlingResult convertFrom(Document document, String webUrl) throws IOException {
         Elements header = document.getElementsByClass("post-header");
         String title = header.select("h1").text();
         Elements headerMeta = document.getElementsByClass("post-header-author");
         String publishedDate = headerMeta.select("span:nth-child(1)").text();
         LocalDateTime dateTime = DateUtils.convertToLocalDateTimeFromDate(publishedDate, ENG_FORMATTER);
-        OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document);
+        OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document, webUrl);
 
-        String category = document.getElementsByClass("cat-tag").text();
         String imageUrl = CrawlerUtils.getFirstImageUrl(document.select("img[alt='']"), WOOWAHAN_BASE_URL);
+
+        if (!StringUtils.hasText(imageUrl)) {
+            imageUrl = ogTagMeta.getImageUrl();
+        }
 
         Elements body = document.getElementsByClass("post-content-body");
         StringBuilder contents = new StringBuilder();
@@ -47,7 +48,6 @@ public class WoowahanTechArticleCrawler implements TechArticleCrawler {
             title,
             dateTime,
             ogTagMeta,
-            category,
             imageUrl,
             contents.toString(),
             webUrl

@@ -78,8 +78,8 @@
 }
 
 .top-rank-article-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.125rem;
+    font-weight: 500;
     color: #E1E5EF;
 
     overflow: hidden;
@@ -99,7 +99,7 @@
 .ranking-article-title-text {
     font-size: 1rem;
     color: #E1E5EF;
-    font-weight: 600;
+    font-weight: 500;
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -112,7 +112,7 @@
 .rank-article-company-name {
     color: #C3C3C3;
     font-size: 0.875rem;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .rank-article-view-count {

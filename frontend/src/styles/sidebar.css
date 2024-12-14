@@ -115,7 +115,6 @@
 .company-name {
     display: flex;
     align-items: center;
-    font-weight: bold;
     font-size: 0.875rem;
     text-align: center;
     white-space: nowrap;
@@ -124,10 +123,12 @@
 
 .company-name.updated {
     color: #D2D7E4;
+    font-weight: 700;
 }
 
 .company-name.not-updated {
     color: #A8AFC1;
+    font-weight: 500;
 }
 
 .expand-button {

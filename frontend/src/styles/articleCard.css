@@ -96,8 +96,9 @@
 .article-author {
     display: inline-block;
     align-content: center;
-    margin-left: 0.2vw;
+    margin-left: 0.42vw;
+    font-weight: 600;
     font-size: 0.75rem;
-    color: #FFFFFF;
+    color: #C3C3C3;
 }
 

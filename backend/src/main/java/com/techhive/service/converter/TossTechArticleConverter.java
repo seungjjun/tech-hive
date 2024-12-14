@@ -16,32 +16,28 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class TossTechArticleCrawler implements TechArticleCrawler {
+public class TossTechArticleConverter implements TechArticleConverter {
 
     private static final String TOSS_BASE_URL = "https://toss.tech";
     private static final DateTimeFormatter KOR_FORMATTER = DateTimeFormatter.ofPattern("yyyy'년' M'월' d'일'", Locale.KOREAN);
 
     @Override
-    public WebCrawlingResult crawling(String webUrl) throws IOException {
-        Document document = Jsoup.connect(webUrl).get();
-
+    public WebCrawlingResult convertFrom(Document document, String url) throws IOException {
         String title = document.getElementsByClass("css-vf4rrt e132k2574").text();
-        Elements categories = document.getElementsByClass("p-chip typography--semibold p-chip--small typography--small p-chip--grey");
-        OgMetaTagEntity ogMetaTag = ExtractorOgMeta.extractOgMetaTag(document);
-
-        String category = "";
-        if (!categories.isEmpty()) {
-            Element categoriesFirst = categories.getFirst();
-            category = categoriesFirst.text().replace("#", "");
-        }
+        OgMetaTagEntity ogMetaTag = ExtractorOgMeta.extractOgMetaTag(document, url);
 
         String publishedDate = document.getElementsByClass("css-154r2lc esnk6d50").text();
         LocalDateTime dateTime = DateUtils.convertToLocalDateTimeFromDate(publishedDate,KOR_FORMATTER);
         String imageUrl = CrawlerUtils.getFirstImageUrl(document.select("img[alt='']"), TOSS_BASE_URL);
+
+        if (!StringUtils.hasText(imageUrl)) {
+            imageUrl = ogMetaTag.getImageUrl();
+        }
 
         Elements body = document.getElementsByClass("css-1vn47db");
         StringBuilder contents = new StringBuilder();
@@ -53,10 +49,9 @@ public class TossTechArticleCrawler implements TechArticleCrawler {
             title,
             dateTime,
             ogMetaTag,
-            category,
             imageUrl,
             contents.toString(),
-            webUrl
+            url
         );
     }
 }

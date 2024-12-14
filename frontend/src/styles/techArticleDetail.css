@@ -39,8 +39,8 @@
 }
 
 .tech-article-detail-logo-box {
-    width: 2.5vw;
-    height: 4.7vh;
+    width: 3rem;
+    height: 3rem;
 }
 
 .tech-article-detail-logo-img {
@@ -55,7 +55,7 @@
     flex-direction: column;
     justify-content: center;
     width: 100%;
-    margin-left: 0.4vw;
+    margin-left: 0.8vw;
     color: #949AA9;
 }
 
@@ -68,7 +68,7 @@
 .tech-article-detail-count-box {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.37vh;
+    margin-top: 0.75vh;
 }
 
 .tech-article-detail-author-article-count {
@@ -118,13 +118,13 @@
 }
 
 .tech-article-detail-pin-point-text-box {
-    margin-bottom: 4.44vh;
+    margin-bottom: 5.5vh;
 }
 
 .tech-article-detail-pin-point-text {
     margin-top: 1.48vh;
     font-size: 1.125rem;
-    color: #AFB3BD;
+    color: #91949D;
 }
 
 .tech-article-detail-core-text-box {
@@ -134,13 +134,18 @@
 .tech-article-detail-core-summary-section {
     white-space: pre-line;
     margin-top: 1.48vh;
+    font-weight: 400;
     font-size: 1.125rem;
     color: #AFB3BD;
 }
 
 .tech-article-detail-core-summary-title {
     color: #E0E3EB;
-    margin-top: 2rem;
+    margin-top: 1rem;
+}
+
+.tech-article-detail-core-summary-list {
+    color: #91949D;
 }
 
 .tech-article-detail-core-summary-item {
@@ -148,13 +153,13 @@
 }
 
 .tech-article-detail-three-line-summary-text-box {
-    margin-bottom: 3vh;
+    margin-bottom: 5.5vh;
 }
 
 .tech-article-detail-three-line-summary-text {
     margin-top: 1.48vh;
     font-size: 1.125rem;
-    color: #AFB3BD;
+    color: #91949D;
 }
 
 .tech-article-detail-og-tag-box {

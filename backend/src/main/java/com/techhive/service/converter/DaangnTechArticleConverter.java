@@ -6,38 +6,37 @@ import com.techhive.utils.DateUtils;
 import com.techhive.utils.ExtractorOgMeta;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class DaangnTechArticleCrawler implements TechArticleCrawler {
+public class DaangnTechArticleConverter implements TechArticleConverter {
 
     private final static String DAANGN_BASE_URL = "https://medium.com/daangn";
 
     @Override
-    public WebCrawlingResult crawling(String webUrl) throws IOException {
-        Document document = Jsoup.connect(webUrl).get();
-
+    public WebCrawlingResult convertFrom(Document document, String webUrl) throws IOException {
         String title = document.selectFirst("h1[data-testid=storyTitle]").text();
         LocalDateTime dateTime = extractPublishedDateTime(document);
-        OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document);
+        OgMetaTagEntity ogTagMeta = ExtractorOgMeta.extractOgMetaTag(document, webUrl);
         String content = extractContent(document);
         String thumbnailImageUrl = extractThumbnailImageUrl(document.selectFirst("source[data-testid=og]"));
+
+        if (!StringUtils.hasText(thumbnailImageUrl)) {
+            thumbnailImageUrl = ogTagMeta.getImageUrl();
+        }
 
         return new WebCrawlingResult(
             title,
             dateTime,
             ogTagMeta,
-            "category",
             thumbnailImageUrl,
             content,
             webUrl
