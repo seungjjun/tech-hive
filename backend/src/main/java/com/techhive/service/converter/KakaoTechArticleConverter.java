@@ -24,7 +24,7 @@ public class KakaoTechArticleConverter implements TechArticleConverter {
 
     private static final String KAKAO_BASE_URL  = "https://tech.kakaopay.com";
 
-    private static final DateTimeFormatter ENG_FORMATTER = DateTimeFormatter.ofPattern("yyyy. MM. dd", Locale.ENGLISH);
+    private static final DateTimeFormatter ENG_FORMATTER = DateTimeFormatter.ofPattern("yyyy. M. d", Locale.ENGLISH);
 
     @Override
     public WebCrawlingResult convertFrom(Document document, String webUrl) throws IOException {
