@@ -38,3 +38,4 @@ out/
 
 ### Backend ###
 backend/src/main/resources/application.yml
+backend/src/main/java/com/techhive/config/tunnel/
